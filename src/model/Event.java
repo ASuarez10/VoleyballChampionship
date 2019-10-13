@@ -30,6 +30,23 @@ public class Event {
 		this.person = person;
 	}
 	
+	//addSpectator
 	
+	public void addSpectator(Spectator s, Spectator root) {
+		
+		if(s.getId().compareTo(root.getId()) < 0) {
+			if(root.getLeft() == null) {
+				root.setLeft(s);
+			}else {
+				addSpectator(s, root.getLeft());
+			}
+		}else {
+			if(root.getRight() == null) {
+				root.setRight(s);
+			}else {
+				addSpectator(s, root.getRight());
+			}
+		}
+	}
 
-}
+}//final
