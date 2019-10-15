@@ -12,12 +12,13 @@ public class Event {
 	private String name;
 	
 	//Relations
-	private Person person;
+	private Spectator spectator;
+	private Competitor competitor;
 	
 	//Constructor
-	public Event(String name, Person person) {
+	public Event(String name, Spectator spectator) {
 		this.name = name;
-		this.person = person;
+		this.spectator= spectator;
 	}
 
 	public String getName() {
@@ -27,13 +28,21 @@ public class Event {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public Person getPerson() {
-		return person;
+	
+	public Spectator getSpectator() {
+		return spectator;
 	}
 
-	public void setPerson(Person person) {
-		this.person = person;
+	public void setSpectator(Spectator spectator) {
+		this.spectator = spectator;
+	}
+
+	public Competitor getCompetitor() {
+		return competitor;
+	}
+
+	public void setCompetitor(Competitor competitor) {
+		this.competitor = competitor;
 	}
 	
 	//addSpectator
@@ -55,7 +64,7 @@ public class Event {
 	}
 	
 	//loadSpectators
-	public void loadSpectators(String path ) throws IOException {
+	public void loadSpectators(String path) throws IOException {
 		
 		if(path != null) {
 			File f = new File(path);
@@ -76,12 +85,11 @@ public class Event {
 				String birthDay = attributes[7];
 				
 				Spectator p = new Spectator(id, firstName, lastName, email, gender, country, photo, birthDay, null, null);
-				//if(root == null){
-				//	root = p;
-			//	}else{
-			//	}
-				addSpectator(p, null);
-			//	}
+				if(spectator == null){
+					spectator = p;
+				}else{
+				addSpectator(p, spectator);
+				}
 				br.readLine();
 			}
 			br.close();
@@ -136,12 +144,12 @@ public class Event {
 	}
 	
 	//seFinal
-	public String seFinal(String idS, Spectator root){
+	public String seFinal(String idS){
 		long t1 = System.nanoTime();
 		String msj = "El espectador no está registrado";
 		
-		if(root != null) {
-			searchSpectators(idS, root);
+		if(spectator != null) {
+			searchSpectators(idS, spectator);
 		}
 		long t2 = System.nanoTime();
 		long tf = t2 - t1;
@@ -149,12 +157,12 @@ public class Event {
 	}
 	
 	//scFinal
-		public String scFinal(String idS, Competitor root){
+		public String scFinal(String idC){
 			long t1 = System.nanoTime();
 			String msj = "El competidor no está registrado";
 			
-			if(root != null) {
-				searchCompetitors(idS, root);
+			if(competitor != null) {
+				searchCompetitors(idC, competitor);
 			}
 			long t2 = System.nanoTime();
 			long tf = t2 - t1;
