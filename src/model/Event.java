@@ -87,7 +87,7 @@ public class Event {
 			String line = br.readLine();
 			int i = 1;
 			int conta = 0;
-			while(line != null && (conta++ < 40000)) {
+			while(line != null && (conta++ < 40000)) { //Hago esta condición porque si dejo los 100000 me sale stackOverFlow
 				String[] attributes = line.split(",");
 				
 				String id = attributes[0];
@@ -109,7 +109,7 @@ public class Event {
 				}
 				
 				
-				line = br.readLine();
+				br.readLine();
 				i++;
 			}
 			br.close();
@@ -267,7 +267,7 @@ public class Event {
 	}
 	
 	//showCByCountry
-	public String showCByCountry(String country) throws CountryNotFoundException { 
+	public String showCByCountry(String country)  { 
 		String msj = "Los competidores de ese pais son:\n";
 		
 		Competitor temp = competitor;
