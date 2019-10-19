@@ -68,6 +68,14 @@ public class Event {
 		}
 	}
 	
+	//addSpectatorFinal
+	public void addSpectatorFinal(Spectator p) {
+		if(spectator == null){
+			spectator = p;
+		}else{
+			addSpectator(p, spectator);
+		}
+	}
 	//loadSpectators
 	public void loadSpectators(String path) throws IOException, PathNullException {
 		
@@ -93,11 +101,8 @@ public class Event {
 				
 				if(i%2 == 0) {
 					Spectator p = new Spectator(id, firstName, lastName, email, gender, country, photo, birthDay, null, null);
-					if(spectator == null){
-						spectator = p;
-					}else{
-					addSpectator(p, spectator);
-					}
+					addSpectatorFinal(p);
+					
 				}else {
 					Competitor p = new Competitor(id, firstName, lastName, email, gender, country, photo, birthDay, null, null);
 					addCompetitor(p);
